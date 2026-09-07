@@ -61,10 +61,6 @@ jobs using a Buildkite artifact and build metadata.
 | x86-64 | `debian-13` | `e2-standard-4` | `e2-small` | `buildkite-ci-stack-x86-64` |
 | ARM64 | `debian-13-arm64` | `t2a-standard-4` | `t2a-standard-1` | `buildkite-ci-stack-arm64` |
 
-The build script checks the architecture reported by GCP before exporting the
-image to downstream jobs. This prevents an incorrectly labelled x86 image from
-being published as ARM64, or vice versa.
-
 Packer does not assign an image family. The publish job makes the image
 available to `allAuthenticatedUsers` and assigns its architecture-specific
 family only after validation passes.
@@ -92,14 +88,6 @@ Validation VMs do not have a GCP service account or OAuth scopes. The Buildkite
 agent token is supplied through instance metadata, and GCP Secret Manager SSH
 key discovery is disabled because the validation job does not clone private
 repositories.
-
-Image lifecycle steps run only for `main` or for trusted manual/API builds;
-publishing remains `main`-only. This prevents ordinary webhook-triggered branch
-builds from receiving image-builder credentials while preserving deliberate
-pre-merge validation by maintainers. Because the pipeline definition is
-repository-controlled, this is defense in depth rather than the security
-boundary; automatic trigger settings, fork restrictions, WIF conditions, and
-secret access policies are managed outside this repository.
 
 ## Validation and VM lifecycle
 
@@ -144,7 +132,7 @@ skip the lifecycle.
 A successful `main` release runs the relevant verification checks, builds both
 images, cleans temporary Packer resources, launches validation VMs, runs Goss,
 and then publishes the images and deletes the validation VMs. To validate a
-branch before merging, a trusted maintainer can manually or API-trigger the
+branch before merging, a trusted maintainer can manually trigger the
 image-builder pipeline for that branch; the candidate images are tested and the
 validation VMs deleted, but publishing is skipped.
 
@@ -204,8 +192,4 @@ The following are intentionally deferred:
 - Additional validation of the image name before the publish step.
 - Reconciliation of the separately managed `queue=gcp` worker infrastructure
   and its autoscaling configuration.
-
-The first complete dual-architecture validation of this process was
-[Build #48](https://buildkite.com/buildkite/elastic-ci-stack-gcp-image-builder/builds/48).
-Both Goss jobs passed 121 checks with no failures or skips, both images were
-published, and both validation VMs were deleted.
+  
