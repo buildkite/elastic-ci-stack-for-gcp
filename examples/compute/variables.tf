@@ -54,7 +54,7 @@ variable "machine_type" {
 variable "image" {
   description = "Source image for boot disk"
   type        = string
-  default     = "buildkite-gcp-stack/buildkite-ci-stack-x86-64-2025-12-12-0341"
+  default     = "buildkite-gcp-stack/buildkite-ci-stack-x86-64-2026-09-08-0703-62-2781c81"
 }
 
 variable "root_disk_size_gb" {
