@@ -296,6 +296,8 @@ command:
 
   buildkite-agent --version:
     exit-status: 0
+    stdout:
+      - /^buildkite-agent version 3\./
 
   dpkg-query -W -f='${Status}' unattended-upgrades:
     exit-status: 0

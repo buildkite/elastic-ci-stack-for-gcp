@@ -12,7 +12,7 @@ ZONE="us-central1-a"
 MACHINE_TYPE=""
 ARCH="x86-64"
 BUILD_NUMBER="$(date +%Y%m%d-%H%M%S)"
-AGENT_VERSION="stable"
+AGENT_VERSION="oldstable"
 SERVICE_ACCOUNT_EMAIL=""
 
 # Colors for output
@@ -33,7 +33,7 @@ OPTIONS:
     -m, --machine-type TYPE       Machine type for build (default: e2-standard-4 or t2a-standard-4)
     -a, --arch ARCH               Architecture: x86-64 or arm64 (default: x86-64)
     -b, --build-number NUMBER     Build number (default: timestamp)
-    -v, --agent-version VERSION   Buildkite agent version (default: stable)
+    -v, --agent-version VERSION   Buildkite agent release channel label (default: oldstable)
     -s, --service-account EMAIL   Service account email for build instance (optional)
     -h, --help                    Show this help message
 

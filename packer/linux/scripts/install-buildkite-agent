@@ -17,7 +17,7 @@ curl -fsSL "https://keys.openpgp.org/vks/v1/by-fingerprint/32A37959C2FA5C3C99EFB
   | sudo gpg --dearmor -o /usr/share/keyrings/buildkite-agent-archive-keyring.gpg
 sudo chmod 644 /usr/share/keyrings/buildkite-agent-archive-keyring.gpg
 
-echo "deb [signed-by=/usr/share/keyrings/buildkite-agent-archive-keyring.gpg] https://apt.buildkite.com/buildkite-agent stable main" \
+echo "deb [signed-by=/usr/share/keyrings/buildkite-agent-archive-keyring.gpg] https://apt.buildkite.com/buildkite-agent oldstable main" \
   | sudo tee /etc/apt/sources.list.d/buildkite-agent.list
 
 sudo apt-get update
