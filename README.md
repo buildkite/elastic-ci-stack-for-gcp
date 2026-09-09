@@ -21,7 +21,7 @@ The module ships with a set of default values which can be overridden as needed,
 ```hcl
 module "elastic-ci-stack-for-gcp" {
   source  = "buildkite/elastic-ci-stack-for-gcp/buildkite"
-  version = "~> 0.4.0"
+  version = "~> 0.5.0"
 
   # Required
   project_id                  = "your-gcp-project"
